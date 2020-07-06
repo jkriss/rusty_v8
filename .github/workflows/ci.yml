@@ -112,11 +112,14 @@ jobs:
 
           sudo apt update
           sudo apt install -yq --no-install-suggests --no-install-recommends \
-            gcc-multilib-arm-linux-gnueabihf
+            gcc-multilib-arm-linux-gnueabihf binfmt-support g++-5-arm-linux-gnu g++-5-multilib \
+            g++-arm-linux-gnueabihf libc6-arm-cross qemu qemu-user \
+            qemu-user-binfmt
 
           build/linux/sysroot_scripts/install-sysroot.py --arch=i386
 
           echo "::set-env name=CARGO_TARGET_ARMV7_UNKNOWN_LINUX_GNUEABIHF_LINKER::/usr/bin/arm-linux-gnueabihf-gcc"
+          echo "::set-env name=QEMU_LD_PREFIX::/usr/arm-linux-gnueabihfc"
 
       - name: Configure cargo data directory
         # After this point, all cargo registry and crate data is stored in
