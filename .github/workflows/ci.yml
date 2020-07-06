@@ -112,8 +112,8 @@ jobs:
 
           sudo apt update
           sudo apt install -yq --no-install-suggests --no-install-recommends \
-            gcc-multilib-arm-linux-gnueabihf binfmt-support g++-5-arm-linux-gnu g++-5-multilib \
-            g++-arm-linux-gnueabihf libc6-arm-cross qemu qemu-user \
+            gcc-multilib-arm-linux-gnueabihf binfmt-support g++-5-arm-linux-gnuueabihf g++-5-multilib \
+            g++-arm-linux-gnueabihf libc6-armhf-cross qemu qemu-user \
             qemu-user-binfmt
 
           build/linux/sysroot_scripts/install-sysroot.py --arch=i386
