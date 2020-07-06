@@ -112,7 +112,7 @@ jobs:
 
           sudo apt update
           sudo apt install -yq --no-install-suggests --no-install-recommends \
-            gcc-multilib-arm-linux-gnueabihf binfmt-support g++-5-arm-linux-gnuueabihf g++-5-multilib \
+            gcc-multilib-arm-linux-gnueabihf binfmt-support g++-5-arm-linux-gnueabihf g++-5-multilib \
             g++-arm-linux-gnueabihf libc6-armhf-cross qemu qemu-user \
             qemu-user-binfmt
 
