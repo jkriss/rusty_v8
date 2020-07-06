@@ -51,6 +51,13 @@ jobs:
             target: aarch64-unknown-linux-gnu
             variant: release
 
+          - os: ubuntu-16.04
+            target: armv7-unknown-linux-gnueabihf
+            variant: debug
+
+          - os: ubuntu-16.04
+            target: armv7-unknown-linux-gnueabihf
+            variant: release
     env:
       V8_FROM_SOURCE: true
       CARGO_VARIANT_FLAG: ${{ matrix.config.variant == 'release' && '--release' || '' }}
@@ -97,6 +104,17 @@ jobs:
 
           echo "::set-env name=CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER::/usr/bin/aarch64-linux-gnu-gcc-5"
           echo "::set-env name=QEMU_LD_PREFIX::/usr/aarch64-linux-gnu"
+
+      - name: Install cross compilation toolchain for armv7
+        if: matrix.config.target == 'armv7-unknown-linux-gnueabihf'
+        run: |
+          rustup target add armv7-unknown-linux-gnueabihf
+
+          sudo apt update
+          sudo apt install -yq --no-install-suggests --no-install-recommends \
+            gcc-multilib-arm-linux-gnueabihf
+
+          echo "::set-env name=CARGO_TARGET_ARMV7_UNKNOWN_LINUX_GNUEABIHF_LINKER::/usr/bin/arm-linux-gnueabihf-gcc"
 
       - name: Configure cargo data directory
         # After this point, all cargo registry and crate data is stored in

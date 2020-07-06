@@ -91,11 +91,19 @@ fn build_v8() {
     }
   }
 
+  println!("target is {:?}", env::var("TARGET").unwrap());
+
   if env::var("TARGET").unwrap() == "aarch64-unknown-linux-gnu" {
     gn_args.push(r#"target_cpu="arm64""#.to_string());
     gn_args.push("use_sysroot=true".to_string());
     maybe_install_sysroot("arm64");
     maybe_install_sysroot("amd64");
+  };
+
+  if env::var("TARGET").unwrap() == "armv7-unknown-linux-gnueabihf" {
+    gn_args.push(r#"target_cpu="arm""#.to_string());
+    gn_args.push("use_sysroot=true".to_string());
+    maybe_install_sysroot("arm");
   };
 
   let gn_root = env::var("CARGO_MANIFEST_DIR").unwrap();
