@@ -114,6 +114,8 @@ jobs:
           sudo apt install -yq --no-install-suggests --no-install-recommends \
             gcc-multilib-arm-linux-gnueabihf
 
+          build/linux/sysroot_scripts/install-sysroot.py --arch=i386
+
           echo "::set-env name=CARGO_TARGET_ARMV7_UNKNOWN_LINUX_GNUEABIHF_LINKER::/usr/bin/arm-linux-gnueabihf-gcc"
 
       - name: Configure cargo data directory
